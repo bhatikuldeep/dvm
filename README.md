@@ -1,80 +1,91 @@
-# Deck Version Manager
+## Introduction
 
-The Deck Version Switcher is a bash script designed to manage different versions of the deck command-line tool by Kong. This script supports installing, switching between versions, and listing installed versions for both macOS and Linux systems.
+While working on local API gateway projects, switching between multiple versions of the decK tool can be a hassle. While in automation setups or CI/CD pipelines, you often specify a specific decK version, **DVM is designed specifically to make local development easier**. With a few simple commands, you can install, switch, and list decK versions locally as needed.
 
-The script:
+### Motivation
 
-- Downloads the specified deck version from GitHub as a Darwin-based file.
-- Extracts the archive.
-- Moves the binary to /usr/local/bin for system-wide access.
+I developed DVM while working on a customer upgrade project where I had to validate API gateway configurations across multiple versions of Kong and decK. My task was to:
 
-> **Warning:** Remove Existing Homebrew Installation (if applicable): If deck was previously installed via Homebrew, remove it to avoid conflicts: `brew uninstall deck`
+- Test decK configurations against Kong 2.8.
+- Convert these configurations to a format compatible with Kong 3.4.
+- Verify the configurations using newer versions of decK.
 
+Each time, I found myself manually downloading different decK versions and fixing installation issues, which quickly became tedious. To streamline this process, I created DVM to manage decK version switches seamlessly. 
 
-## Prerequisites
-- Ensure that you have curl and tar installed.
+By using DVM, you can seamlessly switch between decK versions for local development and testing.
 
-## Setup
+## How to Install and Use decK Version Manager
 
-1. Download the Script: Clone or download the script from the repository.
+### Prerequisites
 
-2. Run the Installation Script: This script will make the Deck Version Manager script executable and place it in /usr/local/bin for easy access.
+Before using DVM, make sure you have the following installed:
 
-```bash
-chmod +x install.sh && ./install.sh
-```
+- `curl` for downloading files from GitHub.
+- `tar` for extracting downloaded archives.
 
-The `install.sh` script will:
+### Installation
 
-- Make the `deck-version-manager.sh` script executable.
+1. **Download and Install the Script**
 
-- Create a symbolic link called dvm in /usr/local/bin, allowing you to use the dvm command from anywhere on your system.
-
-> **Note:**  You may need to use sudo if you encounter permission issues.
-
-## Usage
-
-1. Install a Specific Version
+    First, clone the DVM script from the repository and install it using the following commands:
 
     ```bash
-    dvm install <version>
+    # Clone the repository
+    git clone git@github.com:bhatikuldeep/dvm.git
+
+    # Navigate to the DVM directory
+    cd dvm
+
+    # Run the installation script
+    chmod +x install.sh && ./install.sh
     ```
 
-    Example:
-    ```bash
-    dvm install 1.39.4
-    ```
-2. Switch to a Specific Version
+    > Important to note: If you previously installed decK via Homebrew, remove it to avoid conflicts with DVM using: `brew uninstall deck`
 
-    ```bash
-    dvm switch <version>
-    ```
+2. **Usage**
 
-    Example:
-    ```bash
-    dvm switch 1.38.0
-    ```
+    - Install a Specific Version
+    
+        To install a specific version of decK, use the following command:
 
-3. List Installed Versions
+        ```bash
+        dvm install <version>
+        # Example:
+        dvm install 1.39.4
+        ```
+                
+    - Switch to a Specific Version
+        After installing multiple versions, switch between them using:
 
-    ```bash
-    dvm list
-    ```
+        ```bash    
+        dvm switch <version>
+        # Example:
+        dvm switch 1.38.0
+        ```
 
-    Example:
-    ```bash
-    dvm list
-    ```
-## How to Uninstall
+    - List Installed Versions
+        To see a list of all installed versions:
 
-1. Run the uninstall script: 
+        ```bash    
+        dvm list
+        # Example output:
+        Installed decK versions:
+        * 1.39.4 (current)
+        1.38.0
+        ```
 
-    ```bash
-    chmod +x uninstall.sh && ./uninstall.sh
-    ```
+        This will display all installed versions, highlighting the currently active one.
 
-### What This Script Does:
-- Removes the symbolic link (`dvm`): This ensures that the `dvm` command will no longer be available system-wide.
+3. **Uninstallation**
 
+    - If you ever need to uninstall DVM, simply run the provided uninstall script:
 
-This script assumes that the `deck-version-manager.sh` is in the same directory from which you run the `uninstall.sh` script. If the script is located elsewhere, you might need to modify the script to point to the correct location.
+        ```bash    
+        chmod +x uninstall.sh && ./uninstall.sh
+        ```
+    
+    This will remove the symbolic link for dvm and optionally remove all installed decK versions.
+
+## Conclusion
+
+For developers using decK locally, DVM is a simple yet powerful tool. It eliminates the hassle of manual version management and lets you focus on what matters—developing and testing your Kong configurations. Try DVM for yourself and experience a streamlined local decK Version Manager setup!
