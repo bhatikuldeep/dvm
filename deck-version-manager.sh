@@ -42,7 +42,7 @@ install_and_switch_deck() {
     url="https://github.com/Kong/deck/releases/download/v${version}/deck_${version}_darwin_all.tar.gz"
   elif [ "$os" = "Linux" ]; then
     arch=$(get_arch)
-    url="https://github.com/Kong/deck/releases/download/v${version}/deck_v${version}_linux_${arch}.tar.gz"
+    url="https://github.com/Kong/deck/releases/download/v${version}/deck_${version}_linux_${arch}.tar.gz"
   else
     echo "Unsupported OS: $os"
     exit 1
