@@ -1,3 +1,5 @@
+> **Recommendation (October 2026):** use [mise](https://mise.jdx.dev/) instead of DVM. It pins decK, and any other CLI, per project, with checksums, and CI reads the same file. See [Stop switching tool versions: pin every CLI per project with mise](https://kuldeepbhati.com/posts/pin-cli-versions-per-project-with-mise/). DVM still works, including on Linux since the download fix.
+
 ## Introduction
 
 While working on local API gateway projects, switching between multiple versions of the decK tool can be a hassle. While in automation setups or CI/CD pipelines, you often specify a specific decK version, **DVM is designed specifically to make local development easier**. With a few simple commands, you can install, switch, and list decK versions locally as needed.
